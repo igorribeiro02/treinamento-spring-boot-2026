@@ -1,0 +1,27 @@
+[
+  {
+    "nome": "Igor ribeiro",
+    "idade": 23,
+    "curso": "Ciencia da computação"
+  },
+    {
+        "nome": "Maria Silva",
+        "idade": 30,
+        "curso": "Engenharia de Software"
+    },
+    {
+        "nome": "João Santos",
+        "idade": 28,
+        "curso": "Sistemas de Informação"
+    },
+    {
+        "nome": "Ana Oliveira",
+        "idade": 25,
+        "curso": "Ciência de Dados"
+    },
+    {
+        "nome": "Carlos Pereira",
+        "idade": 32,
+        "curso": "Engenharia de Computação"
+    }
+]
