@@ -1,16 +1,11 @@
--- Estas primiras linhas configuram o HSQLDB para trabalhar com schemas (databases) e simular o mysql
+-- Versão simplificada para rodar em HSQLDB Mem
 SET DATABASE SQL SYNTAX MYS TRUE;
 
-DROP SCHEMA AP3 IF EXISTS CASCADE;
+DROP TABLE post_tag IF EXISTS CASCADE;
+DROP TABLE post IF EXISTS CASCADE;
+DROP TABLE usuario IF EXISTS CASCADE;
 
-CREATE SCHEMA AP3 AUTHORIZATION DBA;
-
-SET INITIAL SCHEMA AP3;
-SET DATABASE DEFAULT INITIAL SCHEMA AP3;
-
--- ATENÇÃO: para usar nomes case-insentitive, precisa desabilitar um recurso do spring-data-jdbc.
-
-CREATE TABLE ap3.usuario(
+CREATE TABLE usuario(
     id              BIGINT          NOT NULL AUTO_INCREMENT,
     username        VARCHAR(50)     NOT NULL,
     nome            VARCHAR(200)    NOT NULL,
@@ -19,19 +14,19 @@ CREATE TABLE ap3.usuario(
     CONSTRAINT PK_USUARIO          PRIMARY KEY (id)
 );
 
-CREATE TABLE ap3.post(
+CREATE TABLE post(
      id              BIGINT          NOT NULL AUTO_INCREMENT,
-     data_postagem   DATE            NOT NULL,
+     data_postagem   TIMESTAMP       NOT NULL,
      mensagem        VARCHAR(2200)   NOT NULL,
      usuario_id      BIGINT          NOT NULL,
      CONSTRAINT PK_POST              PRIMARY KEY (id),
-     CONSTRAINT PK_POST_USUARIO_ID   FOREIGN KEY (usuario_id) REFERENCES ap3.usuario(id)
-)
+     CONSTRAINT FK_POST_USUARIO_ID   FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+);
 
-CREATE TABLE ap3.post_tag(
+CREATE TABLE post_tag(
      post_id           BIGINT          NOT NULL,
      nome              VARCHAR(255)    NOT NULL,
      ordem             INT             NOT NULL DEFAULT 0,
      CONSTRAINT PK_POST_TAG    PRIMARY KEY (post_id, nome),
-     CONSTRAINT UK_POST_TAG_POST   FOREIGN KEY (post_id) REFERENCES ap3.post(id)
+     CONSTRAINT FK_POST_TAG_POST   FOREIGN KEY (post_id) REFERENCES post(id)
 );

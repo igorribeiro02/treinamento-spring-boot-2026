@@ -5,7 +5,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.util.List;
 import java.util.stream.Stream;
 
-@Table(name="post_tag", schema = "ap3")
+@Table(name="post_tag")
 public record Tag(
         String nome
 ) {
