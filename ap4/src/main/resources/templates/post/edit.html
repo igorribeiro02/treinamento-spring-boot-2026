@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${post.id == null} ? 'Novo Post' : 'Editar Post'">Formulário de Post</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; line-height: 1.6; }
+        .form-container { border: 1px solid #ddd; padding: 20px; border-radius: 8px; max-width: 500px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], textarea, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        textarea { height: 100px; }
+        .btn { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; background-color: #007bff; color: white; text-decoration: none; display: inline-block; }
+        .btn-secondary { background-color: #6c757d; }
+        .btn:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1 th:text="${post.id == null} ? 'Novo Post' : 'Editar Post'">Formulário de Post</h1>
+        
+        <form th:action="@{/post/save}" th:object="${post}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{dataPostagem}">
+
+            <div class="form-group">
+                <label for="usuarioId">Autor:</label>
+                <select id="usuarioId" th:field="*{usuarioId}" required>
+                    <option value="">Selecione um usuário</option>
+                    <option th:each="u : ${usuarios}" th:value="${u.id}" th:text="${u.nome}">Usuario</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="mensagem">Mensagem:</label>
+                <textarea id="mensagem" th:field="*{mensagem}" placeholder="O que você está pensando?" required></textarea>
+            </div>
+
+            <button type="submit" class="btn">Salvar</button>
+            <a th:href="@{/post}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

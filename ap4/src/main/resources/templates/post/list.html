@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Posts</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1em; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .btn { padding: 5px 10px; text-decoration: none; border: 1px solid #333; color: #333; background: #eee; border-radius: 3px; }
+        .btn:hover { background: #ddd; }
+    </style>
+</head>
+<body>
+    <h1>Posts</h1>
+    <a th:href="@{/post/new}" class="btn">Novo Post</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Mensagem</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="p : ${posts}">
+                <td th:text="${p.id}">1</td>
+                <td th:text="${#temporals.format(p.dataPostagem, 'dd/MM/yyyy HH:mm')}">01/01/2026</td>
+                <td th:text="${p.mensagem}">Olá mundo</td>
+                <td>
+                    <a th:href="@{/post/{id}(id=${p.id})}" class="btn">Ver</a>
+                    <a th:href="@{/post/{id}/edit(id=${p.id})}" class="btn">Editar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

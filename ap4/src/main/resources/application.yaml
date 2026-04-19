@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: ap3
+
+  datasource:
+    url: jdbc:hsqldb:mem:ap3db;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql

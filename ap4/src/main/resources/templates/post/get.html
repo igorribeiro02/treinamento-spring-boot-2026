@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Post</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; line-height: 1.6; }
+        .post-container { border: 1px solid #ddd; padding: 20px; border-radius: 8px; max-width: 600px; }
+        .author-info { display: flex; align-items: center; margin-bottom: 10px; }
+        .author-info img { border-radius: 50%; width: 50px; height: 50px; margin-right: 10px; }
+        .message { background: #f9f9f9; padding: 15px; border-radius: 5px; white-space: pre-wrap; font-family: inherit; }
+        .tags { margin-top: 10px; }
+        .tag { background: #eee; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; margin-right: 5px; }
+        .btn { display: inline-block; margin-top: 20px; padding: 10px 15px; text-decoration: none; border: 1px solid #333; color: #333; background: #eee; border-radius: 3px; }
+        .btn:hover { background: #ddd; }
+    </style>
+</head>
+<body>
+    <div class="post-container">
+        <h1 th:text="|Post #${post.id}|">Post #1</h1>
+        
+        <div class="author-info">
+            <img th:src="${post.usuario.urlImagem}" src="https://picsum.photos/200/200?random=1" alt="Foto do autor">
+            <div>
+                <strong th:text="${post.usuario.nome}">Nome do Autor</strong><br>
+                <small th:text="|@${post.usuario.username} (${post.usuario.idade} anos)|">@usuario (25 anos)</small>
+            </div>
+        </div>
+
+        <pre class="message" th:text="${post.mensagem}">A mensagem do post vai aqui...</pre>
+        
+        <div class="tags" th:if="${not #lists.isEmpty(post.tags)}">
+            <span class="tag" th:each="t : ${post.tags}" th:text="${t.nome}">tag</span>
+        </div>
+
+        <p><small>Postado em: <span th:text="${#temporals.format(post.dataPostagem, 'dd/MM/yyyy HH:mm:ss')}">01/01/2026 10:00:00</span></small></p>
+    </div>
+
+    <a th:href="@{/post}" class="btn">Voltar para Lista</a>
+    <a th:href="@{/post/{id}/edit(id=${post.id})}" class="btn">Editar Post</a>
+</body>
+</html>
