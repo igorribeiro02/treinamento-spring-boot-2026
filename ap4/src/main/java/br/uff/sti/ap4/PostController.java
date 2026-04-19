@@ -50,13 +50,12 @@ public class PostController {
 
     @PostMapping("save")
     public String save(@ModelAttribute Post post) {
-        // Como Post é record, se vier de um form normal do Spring, ele pode ter problemas de binding 
-        // se não houver um construtor compatível ou se os campos forem nulos.
-        // Em um sistema real usaríamos um DTO (PostForm).
-        // Para simplificar, vamos garantir que a data esteja preenchida se for nula.
         Post toSave = post;
         if (post.dataPostagem() == null) {
-            toSave = post.withDataPostagem(LocalDateTime.now());
+            toSave = toSave.withDataPostagem(LocalDateTime.now());
+        }
+        if (post.tags() == null) {
+            toSave = toSave.withTags(new ArrayList<>());
         }
         postService.save(toSave);
         return "redirect:/post";
