@@ -1,9 +1,9 @@
 spring:
   application:
-    name: ap3
+    name: ap4
 
   datasource:
-    url: jdbc:hsqldb:mem:ap3db;DB_CLOSE_DELAY=-1
+    url: jdbc:hsqldb:mem:ap4db;DB_CLOSE_DELAY=-1
     username: sa
     password:
 

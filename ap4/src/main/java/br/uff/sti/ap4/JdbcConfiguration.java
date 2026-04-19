@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Configuration
-@EnableJdbcRepositories(basePackageClasses = {Post.class})
+@EnableJdbcRepositories(basePackages = "br.uff.sti.ap4")
 public class JdbcConfiguration extends AbstractJdbcConfiguration {
 
     /**
